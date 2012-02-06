@@ -1,10 +1,16 @@
 <header>
-        <%= image_tag("logo2.png", :alt => "Shalom - StudentY Student Administration", :class => "round") %>
-        <nav class="round">
-          <ul>
-            <li><%= link_to "Home", '#' %></li>
-            <li><%= link_to "Help", '#' %></li>
-            <li><%= link_to "Sign in", '#' %></li>
-          </ul>
-        </nav>
-      </header>
+  <% image = image_tag("logo2.png", :alt => "Shalom - StudentY Student Administration", :class => "round") %>
+  <% if signed_in? %>
+      <%= link_to image, user_path(@current_user) %>
+  <% else %>
+      <%= link_to image, new_session_path %>
+  <% end %>
+  <nav class="round">
+    <ul>
+      <% if signed_in? %>
+          <li><%= link_to "Profile", edit_user_path(current_user) %></li>
+          <li><%= link_to "Sign out", session_path(current_user), :method => :delete %></li>
+      <% end %>
+    </ul>
+  </nav>
+</header>

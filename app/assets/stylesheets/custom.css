@@ -151,3 +151,59 @@ div.field, div.actions {
   font-size: 12px;
   list-style: square;
 }
+
+ul.users {
+  margin-top: 1em;
+}
+
+.users li {
+  list-style: none;
+}
+
+.myform{
+margin:0 auto;
+width:400px;
+padding:14px;
+}
+.spacer{clear:both; height:1px;}
+
+#stylized{
+border:solid 2px #b7ddf2;
+background:#ebf4fb;
+    -moz-border-radius:    10px;
+    -webkit-border-radius: 10px;
+    border-radius:         10px;
+}
+
+#stylized label{
+display:block;
+font-weight:bold;
+text-align:right;
+width:140px;
+float:left;
+    padding-top: 2px;
+}
+
+#stylized input{
+float:left;
+font-size:12px;
+padding:4px 2px;
+border:solid 1px #aacfe4;
+width:200px;
+margin:2px 0 20px 10px;
+
+}
+#stylized button{
+
+clear:both;
+    padding-left: 200px;
+margin-left:50px;
+width:125px;
+height:31px;
+/*background:#666666 url(img/button.png) no-repeat;*/
+/*text-align:center;*/
+line-height:31px;
+color:#FFFFFF;
+font-size:11px;
+font-weight:bold;
+}

@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   attr_accessor :password
-  attr_accessible :username, :password, :password_confirmation
+  attr_accessible :username, :password, :password_confirmation, :admin
 
   validates :username, :presence => true, :uniqueness => true
 
@@ -15,9 +15,14 @@ class User < ActiveRecord::Base
   end
 
   def self.authenticate(username, submitted_password)
-    user = find_by_email(username)
+    user = find_by_username(username)
     return nil if user.nil?
     return user if user.has_password?(submitted_password)
+  end
+
+  def self.authenticate_with_salt(id, cookie_salt)
+    user = find_by_id(id)
+    (user && (user.salt == cookie_salt)) ? user : nil
   end
 
   private

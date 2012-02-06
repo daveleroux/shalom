@@ -2,11 +2,21 @@
   <tr>
     <td class="main">
       <h1>
-        <%= @user.username %>
+        Dashboard
       </h1>
+
+      <% if same_user? @user %>
+          <% if admin? %>
+              <%= link_to "See users", users_path %>
+              <br/>
+              <%= link_to "Create new user", new_user_path %>
+              <br/>
+          <% end %>
+          <%= link_to "Capture survey", "#" %>
+      <% end %>
+
     </td>
-    <td class="sidebar round">
-      <p>Has admin rights</p>
-    </td>
+    <!--<td class="sidebar round">-->
+    <!--</td>-->
   </tr>
 </table>

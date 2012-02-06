@@ -1,5 +1,7 @@
 Shalom::Application.routes.draw do
-  get "users/new"
+  #get "sessions/new"
+
+  #get "users/new"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -59,8 +61,12 @@ Shalom::Application.routes.draw do
   # match ':controller(/:action(/:id(.:format)))'
 
   resources :users
+  resources :sessions, :only => [:new, :create, :destroy]
 
-  match '/newuser',  :to => 'users#new'
+  #match '/signin',  :to => 'sessions#new'
+  #match '/signout', :to => 'sessions#destroy'
 
-   root :to => 'users#new'
+  #match '/newuser',  :to => 'users#new'
+
+   root :to => 'sessions#new'
 end
