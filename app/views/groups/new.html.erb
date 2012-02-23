@@ -1,0 +1,20 @@
+<h1>Create a new group</h1>
+
+<!--<div id="stylized" class="myform">-->
+<%= form_for(@group) do |f| %>
+    <%= render 'shared/error_messages', :object => f.object %>
+    <div class="field">
+      <%= f.label :name, "Name:" %>
+      <br/>
+      <%= f.text_field :name %>
+    </div>
+
+    <div class="actions">
+      <td align="right"><%= f.submit "Create" %>
+    </div>
+    <!--<div class="spacer"></div>-->
+<% end %>
+<!--</div>-->
+
+
+<%= set_form_focus %>

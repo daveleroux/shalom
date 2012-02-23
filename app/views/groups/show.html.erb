@@ -1,0 +1,23 @@
+<table>
+  <tr>
+    <td class="main">
+      <h1>
+        <%= @group.name %> Group
+      </h1>
+    </td>
+    <!--<td class="sidebar round">-->
+    <!--</td>-->
+  </tr>
+</table>
+
+<%= link_to "Email all members of the #{@group.name} group", email_group_path(@group) %>
+<ul class="users">
+  <% @group.parties.each do |person|%>
+
+      <li>
+        <%= link_to person.name, party_path(person) %>
+        | <%= link_to "remove from group", remove_party_from_group_path(@group, person), :method => :delete, :confirm => "You sure?", :title => "Delete #{person.name} from #{@group.name}" %>
+      </li>
+  <% end %>
+</ul>
+

@@ -1,0 +1,2 @@
+class StaffRole < PartyRole
+end

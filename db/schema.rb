@@ -11,7 +11,46 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120202092904) do
+ActiveRecord::Schema.define(:version => 20120216101755) do
+
+  create_table "groups", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "name"
+  end
+
+  create_table "groups_parties", :id => false, :force => true do |t|
+    t.integer "group_id"
+    t.integer "party_id"
+  end
+
+  create_table "parties", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "name"
+    t.string   "surname"
+    t.string   "email"
+    t.string   "cell"
+    t.string   "type"
+  end
+
+  create_table "party_roles", :force => true do |t|
+    t.integer  "party_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "type"
+  end
+
+  add_index "party_roles", ["party_id"], :name => "index_party_roles_on_party_id"
+
+  create_table "surveys", :force => true do |t|
+    t.integer  "party_id"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "surveys", ["party_id"], :name => "index_surveys_on_party_id"
 
   create_table "users", :force => true do |t|
     t.string   "username"
