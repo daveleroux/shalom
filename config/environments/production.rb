@@ -57,4 +57,12 @@ Shalom::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
+
+  config.action_mailer.smtp_settings = {:address => "mail.student-y.org",
+                                        :port => 26,
+                                        :user_name => "user1@student-y.org",
+                                        :password => "aprilmayjune",
+                                        :authentication => :plain,
+                                        :openssl_verify_mode => 'none'}
+
 end

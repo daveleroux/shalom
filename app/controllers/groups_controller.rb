@@ -47,10 +47,14 @@ class GroupsController < ApplicationController
    end
 
   def email
+    #investigate using a background process like Delayed Job.
+
     @group = Group.find(params[:id])
-    @group.parties.each do |party|
-      logger.info party.email
-    end
+    #BulkMailer.email(@group.parties, "some subject", "some content")
+    BulkMailer.sms(@group.parties, "some content")
+    #@group.parties.each do |party|
+    #  logger.info party.email
+    #end
     flash[:success] = "Emailed group"
     redirect_to show
   end

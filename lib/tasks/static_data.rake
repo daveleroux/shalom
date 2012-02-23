@@ -24,8 +24,9 @@ namespace :db do
 
   task :create_staff do
     staffGroup = Group.create!({:name => "Staff"})
-    staffGroup.parties << create_staff_member("David", "le Roux", "daveleroux@gmail.com", "0825304575")
-    staffGroup.parties << create_staff_member("Robin", "Ho", "mailrobin2005@gmail.com", "0824042415")
+    staffGroup.parties << create_staff_member("David", "le Roux", "daveleroux@gmail.com", "27825304575")
+    #staffGroup.parties << create_staff_member("Robin", "Ho", "mailrobin2005@gmail.com", "0824042415")
+    #staffGroup.parties << create_staff_member("Robin", "Ho", "mataav@yahoo.co.uk", "0824042415")
   end
 
   desc "Clean, then fill database with static data"
