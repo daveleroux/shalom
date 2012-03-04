@@ -1,4 +1,8 @@
-<h1>All users</h1>
+<h1>Users</h1>
+
+<% if admin? %>
+    <%= link_to "Create new user", new_user_path %>
+<% end %>
 
 <%= will_paginate %>
 

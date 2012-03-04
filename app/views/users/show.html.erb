@@ -7,14 +7,12 @@
 
       <% if same_user? @user %>
           <% if admin? %>
-              <%= link_to "See users", users_path %>
-              <br/>
-              <%= link_to "Create new user", new_user_path %>
+              <%= link_to "Users", users_path %>
               <br/>
           <% end %>
-          <%= link_to "See people and organisations", parties_path %>
+          <%= link_to "People and organisations", parties_path %>
           <br/>
-          <%= link_to "See groups", groups_path %>
+          <%= link_to "Groups", groups_path %>
           <br/>
           <%= link_to "Create new group", new_group_path %>
           <br/>

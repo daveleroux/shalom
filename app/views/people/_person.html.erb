@@ -1,4 +1,4 @@
 <li>
-  <%= link_to person.name, edit_party_path(person) %>
+  <%= link_to person.name, party_path(person) %>
       | <%= link_to "delete", party_path(person), :method => :delete, :confirm => "You sure?", :title => "Delete #{person.name}" %>
 </li>

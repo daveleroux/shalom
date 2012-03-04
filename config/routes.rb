@@ -1,4 +1,6 @@
 Shalom::Application.routes.draw do
+  get "person/new"
+
   #get "parties/new"
 
   #get "groups/new"

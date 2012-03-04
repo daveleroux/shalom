@@ -1,0 +1,9 @@
+<%= render 'shared/display_fields', {
+        :heading => "Person Details",
+        :fields => [
+                {"Name:" => @party.name},
+                {"Surname:" => @party.surname},
+                {"Email:" => @party.email},
+                {"Cell:" => @party.cell},
+        ]} %>
+<%= link_to "Edit details", edit_party_path(@party) %>

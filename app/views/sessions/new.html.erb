@@ -1,17 +1,26 @@
 <h1>Sign in</h1>
 
 <%= form_for(:session, :url => sessions_path) do |f| %>
-  <div class="field">
-    <%= f.label :username %><br />
-    <%= f.text_field :username %>
-  </div>
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password %>
-  </div>
-  <div class="actions">
-    <%= f.submit "Sign in" %>
-  </div>
+
+    <table>
+
+      <tr>
+        <td class="formDescription"><%= f.label "Username:" %></td>
+        <td><%= f.text_field :username %></td>
+      </tr>
+
+
+      <tr>
+        <td class="formDescription"><%= f.label "Password:" %></td>
+        <td class="formDescription"><%= f.password_field :password %></td>
+      </tr>
+
+      <tr>
+        <td></td>
+        <td class="formDescription"><%= f.submit "Sign in" %></td>
+      </tr>
+
+    </table>
 <% end %>
 
 <%= set_form_focus %>

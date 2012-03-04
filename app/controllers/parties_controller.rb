@@ -28,10 +28,11 @@ class PartiesController < ApplicationController
    end
 
    def update
-     @party = Group.find(params[:id])
+     @party = Party.find(params[:id])
+     logger.info params[:party].inspect
      if @party.update_attributes(params[:party])
-       flash[:success] = "Group updated."
-       redirect_to @party
+       flash[:success] = "Party updated."
+       redirect_to @party.partyize
      else
        render 'edit'
      end

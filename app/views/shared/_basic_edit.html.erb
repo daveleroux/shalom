@@ -1,0 +1,22 @@
+<%= form_for(model) do |f| %>
+    <%= render 'shared/error_messages', :object => f.object %>
+
+    <% fields.each do |field| %>
+        <div class="field">
+
+          <% field.each { |key, value| @key_v = key; @value_v = value } %>
+
+          <%= f.label @key_v %>
+          <br/>
+
+          <%= f.text_field @value_v %>
+
+        </div>
+    <% end %>
+
+    <div class="actions">
+      <%= f.submit "Update" %>
+    </div>
+<% end %>
+
+<%= set_form_focus %>

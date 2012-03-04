@@ -1,0 +1,14 @@
+<h1><%= heading %></h1>
+<table>
+  <% fields.each do |field| %>
+      <tr>
+        <td class="formDescription">
+          <% field.each { |key, value| @key_v = key; @value_v = value } %>
+          <%= @key_v %>
+        </td>
+        <td>
+          <%= @value_v %>
+        </td>
+      </tr>
+  <% end %>
+</table>
