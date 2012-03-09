@@ -1,14 +1,4 @@
-<table>
-  <tr>
-    <td class="main">
-      <h1>
-        <%= @group.name %> Group
-      </h1>
-    </td>
-    <!--<td class="sidebar round">-->
-    <!--</td>-->
-  </tr>
-</table>
+<h1><%= @group.name %> Group</h1>
 
 <%= link_to "Email all members of the #{@group.name} group", email_group_path(@group) %>
 <ul class="users">

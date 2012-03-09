@@ -60,7 +60,11 @@ class GroupsController < ApplicationController
   end
 
   def remove_party
-    logger.info "remove #{Party.find(params[:party_id])} from group #{Group.find(params[:group_id])}"
+    group = Group.find(params[:group_id])
+    party = Party.find(params[:party_id])
+
+    group.parties.delete party
+
     flash[:success] = "Removed from group"
     params.replace(:id => params[:group_id])
     redirect_to show

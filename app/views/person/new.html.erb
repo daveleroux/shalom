@@ -1,7 +1,8 @@
-<h1>Edit Person</h1>
+<h1>New Person</h1>
 <%= render 'shared/basic_edit', {
-        :model => @party.partyize,
-        :button_text => "Update",
+        :model => @person, #need to specify maybe type here
+        :button_text => "Create",
+        :path => '/people',
         :fields => [
                 {"Name:" => :name},
                 {"Surname:" => :surname},

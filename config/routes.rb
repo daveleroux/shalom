@@ -1,6 +1,8 @@
 Shalom::Application.routes.draw do
   get "person/new"
 
+
+
   #get "parties/new"
 
   #get "groups/new"
@@ -77,6 +79,9 @@ Shalom::Application.routes.draw do
   #match '/newuser',  :to => 'users#new'
 
    root :to => 'sessions#new'
+
+  match '/people/new' => 'person#new', :as => :new_person, :via => :get
+  match '/people' => 'person#create', :via => :post
 
   match 'groups/email/:id' => 'groups#email', :as => :email_group
   match 'groups/:group_id/party/:party_id' => 'groups#remove_party', :as => :remove_party_from_group

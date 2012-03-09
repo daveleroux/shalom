@@ -13,7 +13,8 @@ class PartiesController < ApplicationController
      @party = Party.new
    end
 
-   def create
+
+   #def create
      #@ = Group.new(params[:group])
      #if @group.save
      #  flash[:success] = "Created new group"
@@ -21,7 +22,7 @@ class PartiesController < ApplicationController
      #else
      #  render 'new'
      #end
-   end
+   #end
 
    def edit
      @party = Party.find(params[:id])

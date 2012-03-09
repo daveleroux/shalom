@@ -4,7 +4,7 @@ class BulkMailer < ActionMailer::Base
   def sms (parties, content)
     @content = content;
     parties.collect { |party| party.getPreferredCell() }.each do |cell|
-      mail(:to => cell << "@community.bulksms.com", :subject => "Timodog").deliver
+      mail(:to => cell << "@community.bulksms.com", :subject => "XXX").deliver
     end
   end
 
