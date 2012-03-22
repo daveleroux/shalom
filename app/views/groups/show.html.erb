@@ -1,8 +1,20 @@
-<h1><%= @group.name %> Group</h1>
+<div>
+  <h1><%= @group.name %> Group</h1>
+</div>
 
-<%= link_to "Email all members of the #{@group.name} group", email_group_path(@group) %>
+
+<div class = "pageActions">
+
+<%= form_tag sms_group_path(@group) do %>
+    <%= text_area_tag(:message, nil, :cols => 25, :rows => 7, :class => "alignRight", :maxlength => "147") %>
+      <p class="charsRemaining"></p>
+    <%= submit_tag("SMS group", :class => "alignRight") %>
+<% end %>
+<!-- link_to "Email all members of the #{@group.name} group", email_group_path(@group) -->
+</div>
+
 <ul class="users">
-  <% @group.parties.each do |person|%>
+  <% @group.parties.each do |person| %>
 
       <li>
         <%= link_to person.name, party_path(person) %>
@@ -10,4 +22,7 @@
       </li>
   <% end %>
 </ul>
+
+<%= limit_textarea %>
+
 

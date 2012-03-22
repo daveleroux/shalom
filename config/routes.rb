@@ -83,6 +83,8 @@ Shalom::Application.routes.draw do
   match '/people/new' => 'person#new', :as => :new_person, :via => :get
   match '/people' => 'person#create', :via => :post
 
-  match 'groups/email/:id' => 'groups#email', :as => :email_group
+  match '/parties/:id' => 'parties#add_to_group', :via => :post
+
+  match 'groups/sms/:id' => 'groups#sms', :as => :sms_group, :via => :post
   match 'groups/:group_id/party/:party_id' => 'groups#remove_party', :as => :remove_party_from_group
 end

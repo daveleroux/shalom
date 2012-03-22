@@ -1,9 +1,26 @@
+<div>
+  <h1>Person Details</h1>
+</div>
+
+<span class="pageActions">
+  <ul>
+    <li><%= link_to "Edit details", edit_party_path(@party) %></li>
+    <li>
+      <%= form_tag do %>
+          <%= hidden_field_tag(:party_id, @party.id) %>
+          <%= "Add to group:" %>
+          <%= select("groups", "group_id", (Group.all - @party.groups).collect { |g| [g.name, g.id] }, {:include_blank => true}) %></li>
+          <%= submit_tag("Add", :class => "alignRight") %>
+      <% end %>
+      </ul>
+</span>
+
 <%= render 'shared/display_fields', {
-        :heading => "Person Details",
         :fields => [
                 {"Name:" => @party.name},
                 {"Surname:" => @party.surname},
                 {"Email:" => @party.email},
                 {"Cell:" => @party.cell},
+                {"Belongs to groups:" => @party.groups.collect { |group| group.name }.join(", ")},
         ]} %>
-<%= link_to "Edit details", edit_party_path(@party) %>
+

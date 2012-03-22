@@ -1,5 +1,5 @@
 <!--, :url => '/new'-->
-<%= form_for(model, :url => path) do |f| %>
+<%= form_for(model) do |f| %>
     <%= render 'shared/error_messages', :object => f.object %>
 
     <% fields.each do |field| %>
