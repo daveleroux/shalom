@@ -21,6 +21,7 @@
                 {"Surname:" => @party.surname},
                 {"Email:" => @party.email},
                 {"Cell:" => @party.cell},
+                {"Gender:" => @party.gender},
                 {"Belongs to groups:" => @party.groups.collect { |group| group.name }.join(", ")},
         ]} %>
 

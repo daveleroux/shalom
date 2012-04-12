@@ -5,12 +5,17 @@
     <% fields.each do |field| %>
         <div class="field">
 
-          <% field.each { |key, value| @key_v = key; @value_v = value } %>
 
-          <%= f.label @key_v %>
+          <%= f.label field[:label] %>
           <br/>
 
-          <%= f.text_field @value_v %>
+          <% type_hash = field[:type_hash] %>
+          <% case type_hash[:type] %>
+          <% when :text %>
+          <%= f.text_field field[:value] %>
+          <% when :combo %>
+              <%= f.select  field[:value], type_hash[:options] %>
+          <% end %>
 
         </div>
     <% end %>

@@ -5,6 +5,10 @@ class Person < Party
             :length => {:is => 11, :message => "cell must have a length of 11 (or be empty)"},
             :allow_blank => true
 
+  validates :gender,
+            :inclusion => {:in => Gender.values,
+                           :message => "'%{value}' is not a valid gender"}
+
 
   def getPreferredEmail()
     email

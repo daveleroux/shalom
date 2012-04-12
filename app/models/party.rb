@@ -1,6 +1,6 @@
 class Party < ActiveRecord::Base
   attr_accessible :name
-  attr_accessible :surname, :email, :cell #think of these fields as actually only on Person
+  attr_accessible :surname, :email, :cell, :gender #think of these fields as actually only on Person
 
   def partyize
     self.becomes(Party)

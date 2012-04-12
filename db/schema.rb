@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120216101755) do
+ActiveRecord::Schema.define(:version => 20120412100348) do
 
   create_table "groups", :force => true do |t|
     t.datetime "created_at"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(:version => 20120216101755) do
     t.string   "email"
     t.string   "cell"
     t.string   "type"
+    t.string   "gender"
   end
 
   create_table "party_roles", :force => true do |t|
@@ -39,6 +40,7 @@ ActiveRecord::Schema.define(:version => 20120216101755) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "type"
+    t.string   "faculty"
   end
 
   add_index "party_roles", ["party_id"], :name => "index_party_roles_on_party_id"

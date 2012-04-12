@@ -1,0 +1,3 @@
+class StudentRole < PartyRole
+
+end
