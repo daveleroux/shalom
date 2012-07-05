@@ -15,13 +15,18 @@
       </ul>
 </span>
 
-<%= render 'shared/display_fields', {
-        :fields => [
-                {"Name:" => @party.name},
-                {"Surname:" => @party.surname},
-                {"Email:" => @party.email},
-                {"Cell:" => @party.cell},
-                {"Gender:" => @party.gender},
-                {"Belongs to groups:" => @party.groups.collect { |group| group.name }.join(", ")},
-        ]} %>
+<span class="block">
+  <b>Person</b><br/>
+  <%= render 'shared/display_fields', {
+          :fields => [
+                  {"Name:" => @party.name},
+                  {"Surname:" => @party.surname},
+                  {"Email:" => @party.email},
+                  {"Cell:" => @party.cell},
+                  {"Gender:" => @party.gender},
+                  {"Belongs to groups:" => @party.groups.collect { |group| group.name }.join(", ")},
+                  {"Notes:" => @party.notes}
+          ]} %>
+</span>
+<br/>
 

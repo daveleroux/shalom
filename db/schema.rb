@@ -11,7 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120412100348) do
+ActiveRecord::Schema.define(:version => 20120504101457) do
+
+  create_table "base_addresses", :force => true do |t|
+    t.integer  "party_id"
+    t.string   "type"
+    t.string   "address"
+    t.string   "residence"
+    t.string   "room"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "base_addresses", ["party_id"], :name => "index_base_addresses_on_party_id"
 
   create_table "groups", :force => true do |t|
     t.datetime "created_at"
@@ -33,6 +45,7 @@ ActiveRecord::Schema.define(:version => 20120412100348) do
     t.string   "cell"
     t.string   "type"
     t.string   "gender"
+    t.text     "notes"
   end
 
   create_table "party_roles", :force => true do |t|
@@ -41,6 +54,7 @@ ActiveRecord::Schema.define(:version => 20120412100348) do
     t.datetime "updated_at"
     t.string   "type"
     t.string   "faculty"
+    t.boolean  "member"
   end
 
   add_index "party_roles", ["party_id"], :name => "index_party_roles_on_party_id"
@@ -50,6 +64,11 @@ ActiveRecord::Schema.define(:version => 20120412100348) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "notes"
+    t.string   "type"
+    t.boolean  "investigate"
+    t.boolean  "bible_study"
+    t.boolean  "small_event"
   end
 
   add_index "surveys", ["party_id"], :name => "index_surveys_on_party_id"

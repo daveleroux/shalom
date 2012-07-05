@@ -1,0 +1,10 @@
+<span class="block">
+  <b>Standard Survey</b><br/>
+<%= render 'shared/display_fields', {
+        :fields => [
+                {"Interested in investigating the faith:" =>  convert_bool(@survey.investigate)},
+                {"Interested in a Bible study:" => convert_bool(@survey.bible_study)},
+                {"Interested in a small event:" => convert_bool(@survey.small_event)},
+        ]} %>
+</span>
+<br/>

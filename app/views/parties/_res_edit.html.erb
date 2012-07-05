@@ -1,0 +1,12 @@
+<span class="block">
+  <b>Staying</b><br/>
+
+  <%= render 'shared/basic_fields_for', {
+          :model => @party.base_address.baseaddressize,
+          :fields => [
+                  {:label => "Residence:", :value => :residence, :type_hash => {:type => :combo, :options => Residence.values}},
+                  {:label => "Room Number:", :value => :room, :type_hash => {:type => :text}}
+          ]
+  } %>
+</span>
+<br/>

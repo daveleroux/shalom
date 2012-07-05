@@ -240,5 +240,11 @@ ul.users {
 
 .formDescription {
     text-align: right;
+    vertical-align: top;
     font-weight: bold;
+}
+
+.block table {
+  border: 1px gray;
+  background: #d3d3d3;
 }

@@ -1,0 +1,3 @@
+class Res < BaseAddress
+
+end

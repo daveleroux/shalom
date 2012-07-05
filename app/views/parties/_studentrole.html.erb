@@ -1,0 +1,9 @@
+<span class="block">
+  <b>Student Role</b><br/>
+  <%= render 'shared/display_fields', {
+          :fields => [
+                  {"Faculty:" => @role.faculty},
+                  {"Member:" => convert_bool(@role.member)},
+          ]} %>
+</span>
+<br/>

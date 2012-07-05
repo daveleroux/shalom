@@ -1,0 +1,11 @@
+<span class="block">
+  <b>Staying</b><br/>
+
+<%= render 'shared/basic_fields_for', {
+        :model => @party.base_address.baseaddressize,
+        :fields => [
+                {:label => "Address:", :value => :address, :type_hash => {:type => :text}},
+        ]
+} %>
+</span>
+<br/>

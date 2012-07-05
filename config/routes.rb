@@ -2,7 +2,6 @@ Shalom::Application.routes.draw do
   get "person/new"
 
 
-
   #get "parties/new"
 
   #get "groups/new"
@@ -71,14 +70,15 @@ Shalom::Application.routes.draw do
   resources :users
   resources :sessions, :only => [:new, :create, :destroy]
   resources :groups
-  resources :parties
-
+  resources :parties do
+    resources :base_addresses
+  end
   #match '/signin',  :to => 'sessions#new'
   #match '/signout', :to => 'sessions#destroy'
 
   #match '/newuser',  :to => 'users#new'
 
-   root :to => 'sessions#new'
+  root :to => 'sessions#new'
 
   match '/people/new' => 'person#new', :as => :new_person, :via => :get
   match '/people' => 'person#create', :via => :post

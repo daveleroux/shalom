@@ -1,0 +1,9 @@
+<span class="block">
+  <b>Staying</b><br/>
+<%= render 'shared/display_fields', {
+        :fields => [
+                {"Residence:" => @party.base_address.residence},
+                        {"Room Number:" => @party.base_address.room},
+        ]} %>
+</span>
+<br/>

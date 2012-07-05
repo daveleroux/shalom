@@ -1,1 +1,23 @@
-<%= render  @party.type.downcase << "_edit" %>
+<% @subtype_name = @party.type.downcase %>
+<%= form_for(@party.partyize) do |form| %>
+
+
+    <%= render @subtype_name << "_edit" %>
+    <%= render @party.base_address.type.downcase << "_edit" %>
+    <% @party.party_roles.each { |role| %>
+        <% @role = role %>
+        <%= render @role.type.downcase << "_edit" %>
+    <% } %>
+    <% @party.surveys.each { |survey| %>
+        <% @survey = survey %>
+        <%= render @survey.type.downcase << "_edit" %>
+    <% } %>
+
+
+    <div class="actions">
+      <%= form.submit "Update" %>
+    </div>
+
+<% end %>
+
+<%= set_form_focus %>

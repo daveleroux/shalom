@@ -1,0 +1,12 @@
+<!--, :url => '/new'-->
+<%= form_for(model) do |f| %>
+    <%= render 'shared/error_messages', :object => f.object %>
+
+    <%= render 'shared/edit_fields', :f => f, :fields => fields %>
+
+    <div class="actions">
+      <%= f.submit button_text %>
+    </div>
+<% end %>
+
+<%= set_form_focus %>

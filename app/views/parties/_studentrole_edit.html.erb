@@ -1,0 +1,12 @@
+<span class="block">
+  <b>Student Role</b><br/>
+
+  <%= render 'shared/basic_fields_for', {
+          :model => "role[]",
+          :fields => [
+                  {:label => "Faculty:", :value => :faculty, :type_hash => {:type => :text}},
+                  {:label => "Member:", :value => :member, :type_hash => {:type => :check}}
+          ]
+  } %>
+</span>
+<br/>

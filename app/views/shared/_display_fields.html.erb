@@ -1,13 +1,18 @@
-<table>
+<% def convert_bool(b)
+    b ? "yes" : "no"
+  end
+%>
+<table class="round">
   <% fields.each do |field| %>
       <tr>
+        <% field.each do |key, value| %>
         <td class="formDescription">
-          <% field.each { |key, value| @key_v = key; @value_v = value } %>
-          <%= @key_v %>
+          <%= key %>
         </td>
         <td>
-          <%= @value_v %>
+          <%= value %>
         </td>
+        <% end %>
       </tr>
   <% end %>
 </table>

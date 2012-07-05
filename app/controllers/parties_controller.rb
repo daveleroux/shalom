@@ -30,12 +30,20 @@ class PartiesController < ApplicationController
 
   def update
     @party = Party.find(params[:id])
-    logger.info params[:party].inspect
-    if @party.update_attributes(params[:party])
+    logger.info "XXXXXXXXXXXXX"
+    logger.info params.inspect
+    logger.info "XXXXXXXXXXXXX"
+    @party.update_attributes(params[:party])
+    @party.base_address.update_attributes(params[:base_address])
+
+    @party.party_roles.update params[:role].keys, params[:role].values
+
+    if @party.save
       flash[:success] = "Party updated."
       redirect_to @party.partyize
     else
-      render 'edit'
+      flash[:notice] = 'Failed.'
+      #render 'edit'
     end
   end
 

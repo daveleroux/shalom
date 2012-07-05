@@ -1,0 +1,3 @@
+class Address < BaseAddress
+
+end

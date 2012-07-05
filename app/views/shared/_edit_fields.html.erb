@@ -1,0 +1,28 @@
+<table class="round">
+
+  <% fields.each do |field| %>
+      <tr>
+
+        <td class="formDescription">
+          <%= f.label field[:label]
+          %>
+        </td>
+
+        <td>
+        <% type_hash = field[:type_hash] %>
+        <% case type_hash[:type] %>
+        <% when :text %>
+            <%= f.text_field field[:value] %>
+        <% when :text_area %>
+            <%= f.text_area field[:value] %>
+        <% when :combo %>
+            <%= f.select field[:value], type_hash[:options] %>
+        <% when :check %>
+            <%= f.check_box field[:value] %>
+        <% end %>
+        </td>
+
+      </tr>
+  <% end %>
+
+</table>

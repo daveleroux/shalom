@@ -1,1 +1,10 @@
 <%= render  @party.type.downcase %>
+<%= render @party.base_address.type.downcase %>
+<% @party.party_roles.each { |role|  %>
+    <% @role = role %>
+    <%= render  @role.type.downcase %>
+<% } %>
+<% @party.surveys.each { |survey|  %>
+    <% @survey = survey %>
+    <%= render  @survey.type.downcase %>
+<% } %>
