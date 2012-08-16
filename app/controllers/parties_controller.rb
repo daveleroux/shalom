@@ -1,8 +1,45 @@
 class PartiesController < ApplicationController
   before_filter :authenticate
+  respond_to :html
 
   def index
-    @parties = Party.paginate(:page => params[:page])
+
+    if !params[:q].blank?
+      #logger.info params[:q].inspect
+
+      params[:q].each_pair do |k,v|
+        if v == "Any"
+          params[:q].delete(k)
+        end
+      end
+
+      #if params[:q][:gender_eq] == "Any"
+      #  params[:q].delete(:gender_eq)
+      #end
+      #if params[:q][:base_address_residence_eq] == "Any"
+      #  params[:q].delete(:base_address_residence_eq)
+      #end
+      @search = Party.search(params[:q])
+      #logger.info @search.inspect
+
+      @search.build_grouping unless @search.groupings.any?
+      @parties = @search.result(distinct: true)
+
+      respond_to do |format|
+        format.html {}
+      end
+
+    else
+      @search = Party.search(params[:q])
+      @search.build_grouping unless @search.groupings.any?
+      @parties = []
+    end
+
+    #@q = Party.search(params[:q])
+    #if !@q.empty?
+    #  @parties = @q.result(:distinct => true)
+    #end
+    #@parties = Party.paginate(:page => params[:page])
   end
 
   def show
@@ -38,6 +75,8 @@ class PartiesController < ApplicationController
 
     @party.party_roles.update params[:role].keys, params[:role].values
 
+    @party.surveys.update params[:survey].keys, params[:survey].values
+
     if @party.save
       flash[:success] = "Party updated."
       redirect_to @party.partyize
@@ -65,6 +104,11 @@ class PartiesController < ApplicationController
     else
       redirect_to(root_path)
     end
+  end
+
+  def search
+    index
+    render :index
   end
 
   private

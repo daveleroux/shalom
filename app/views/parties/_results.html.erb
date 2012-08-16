@@ -1,0 +1,17 @@
+<h2>Results</h2>
+
+<table>
+  <!--<thead>-->
+    <!--<th>< sort_link @search, :id, {}, :method => action_name == 'advanced_search' ? :post : :get %></th>-->
+    <!--<th>< sort_link @search, :first_name, {}, :method => action_name == 'advanced_search' ? :post : :get %></th>-->
+    <!--<th>< sort_link @search, :last_name, {}, :method => action_name == 'advanced_search' ? :post : :get %></th>-->
+    <!--<th>< sort_link @search, :email, {}, :method => action_name == 'advanced_search' ? :post : :get %></th>-->
+  <!--</thead>-->
+  <tbody>
+    <% @parties.each do |party| %>
+      <tr>
+        <td><%= party.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

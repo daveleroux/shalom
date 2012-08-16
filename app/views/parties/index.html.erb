@@ -2,9 +2,62 @@
 
 <%= link_to "Create new person", new_person_path %>
 
-<%= will_paginate %>
+<%= search_form_for @search, url: search_parties_path, html: {method: :post} do |f| %>
+    <% setup_search_form f %>
 
-<ul class="users">
+    <%= f.label "Gender: " %>
+    <%= f.select :gender_eq, ([] << :Any)+ Gender.values %>
+    <br/>
+    <%= f.label "Residence: " %>
+    <%= f.select :base_address_residence_eq, ([] << :Any)+ Residence.values %>
+
+    <!--<fieldset>-->
+    <!--<legend>Sorting</legend>-->
+    <!--< f.sort_fields do |s| %>-->
+    <!--< render 'sort_fields', f: s %>-->
+    <!--< end %>-->
+    <!--< button_to_add_fields "Add Sort", f, :sort %>-->
+    <!--</fieldset>-->
+
+    <!--<fieldset>-->
+      <!--<legend>Condition Groups</legend>-->
+      <%= f.grouping_fields do |g| %>
+          <%= render 'grouping_fields', f: g %>
+      <% end %>
+      <!--< button_to_add_fields "Add Condition Group", f, :grouping %>-->
+    <!--</fieldset>-->
+
+    <!--< label_tag :distinct, 'Return distinct records?' %>-->
+    <!--< check_box_tag :distinct, '1', params[:distinct].to_i == 1 %>-->
+    <%= f.submit %>
+<% end %>
+
+<script type="text/javascript">
+$('#searchResults tr').filter(':has(:checkbox:checked)').find('td').each(function() {
+    // this = td element
+});
+</script>
+
+<!--< render 'results' %>-->
+<table id="searchResults">
+  <tbody>
   <%= render @parties %>
-</ul>
-<%= will_paginate %>
+  </tbody>
+</table>
+
+<!--< search_form_for @q, :url => search_parties_path,-->
+<!--:html => {:method => :post} do |f| %>-->
+<!--< f.label :name_cont %>-->
+<!--< f.text_field :name_cont %>-->
+<!--< f.submit %>-->
+<!--< end %>-->
+
+<!--
+< will_paginate %>
+              -->
+<!--<ul class="users">-->
+<!--< render @parties %>-->
+<!--</ul>-->
+<!--
+< will_paginate %>
+-->

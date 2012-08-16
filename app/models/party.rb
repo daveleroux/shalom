@@ -6,6 +6,11 @@ class Party < ActiveRecord::Base
     self.becomes(Party)
   end
 
+  def self.ransackable_attributes(auth_object = nil)
+      #super & ['name', 'notes', 'surname', 'email', 'cell', 'gender', 'created_at', 'updated_at']
+      super & ['name', 'notes', 'surname', 'email', 'cell', 'gender']
+  end
+
   has_many :surveys, :dependent => :destroy
   has_many :party_roles, :dependent => :destroy
   has_one :base_address, :dependent => :destroy

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120504101457) do
+ActiveRecord::Schema.define(:version => 20120712194527) do
 
   create_table "base_addresses", :force => true do |t|
     t.integer  "party_id"
@@ -24,6 +24,13 @@ ActiveRecord::Schema.define(:version => 20120504101457) do
   end
 
   add_index "base_addresses", ["party_id"], :name => "index_base_addresses_on_party_id"
+
+  create_table "dogs", :force => true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "groups", :force => true do |t|
     t.datetime "created_at"

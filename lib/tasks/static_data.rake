@@ -7,13 +7,16 @@ namespace :db do
     Rake::Task['db:reset'].invoke
   end
 
-
   task :create_admin_user do
     admin = User.create!(:username => "admin",
                          :password => "ystudent",
                          :password_confirmation => "ystudent")
     admin.toggle!(:admin)
   end
+
+  desc "Clean, then insert admin user"
+    task :clean_then_admin_user => [:clean, :create_admin_user] do
+    end
 
   def create_staff_member(name, surname, email, cell, gender, address)
     person = Person.create!(:name => name,

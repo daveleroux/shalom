@@ -1,0 +1,13 @@
+<span class="block">
+  <b>Standard Survey</b><br/>
+
+  <%= render 'shared/basic_fields_for', {
+          :model => "survey[]",
+          :fields => [
+                  {:label => "Interested in investigating the faith:", :value => :investigate, :type_hash => {:type => :check}},
+                  {:label => "Interested in a Bible study:", :value => :bible_study, :type_hash => {:type => :check}},
+                  {:label => "Interested in a small event:", :value => :small_event, :type_hash => {:type => :check}},
+          ]
+  } %>
+</span>
+<br/>

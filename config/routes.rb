@@ -70,9 +70,22 @@ Shalom::Application.routes.draw do
   resources :users
   resources :sessions, :only => [:new, :create, :destroy]
   resources :groups
+
+  #resources :parties, only: :index do
+  #  match 'advanced_search' => 'users#advanced_search',
+  #        on: :collection, via: [:get, :post], as: :advanced_search
+  #end
+
+  #resources :parties, only: :index do
   resources :parties do
-    resources :base_addresses
+    #resources :base_addresses
+    #collection do
+      match 'search' => 'parties#search',
+            on: :collection, via: [:get, :post], :as => :search
+    #end
   end
+
+
   #match '/signin',  :to => 'sessions#new'
   #match '/signout', :to => 'sessions#destroy'
 
@@ -87,4 +100,5 @@ Shalom::Application.routes.draw do
 
   match 'groups/sms/:id' => 'groups#sms', :as => :sms_group, :via => :post
   match 'groups/:group_id/party/:party_id' => 'groups#remove_party', :as => :remove_party_from_group
+
 end
