@@ -1,21 +1,21 @@
-
 <script type="text/javascript">
     function addressTypeChange() {
         $("#address_type_changed").val($("#addressType option:selected").text());
-        $("#updatePerson").submit();
+        $("#createPerson").submit();
     }
 </script>
 
-<h1>Edit Party</h1>
+<h1>New Person</h1>
 
 <%= render 'shared/error_messages', :object => @party %>
 
 <% @subtype_name = @party.type.downcase %>
-<%= form_for(@party.partyize, :html => {:id =>"updatePerson"}) do |form| %>
+<%= form_for(@party.partyize, :url => '/person/create', :html => {:id =>"createPerson"}) do |form| %>
+
 
     <%= hidden_field_tag(:address_type_changed) %>
 
-    <%= render @subtype_name << "_edit" %>
+    <%= render "parties/" << @subtype_name << "_edit" %>
 
     <b>Staying</b><br/>
 
@@ -26,19 +26,20 @@
       <option value="Residence" <%= type == "res" ? 'selected="selected"' : '' %> >Residence</option>
     </select>
 
-    <%= render type << "_edit" %>
+
+    <%= render "parties/" << @party.base_address.type.downcase << "_edit" %>
     <% @party.party_roles.each { |role| %>
         <% @role = role %>
-        <%= render @role.type.downcase << "_edit" %>
+        <%= render "parties/" << @role.type.downcase << "_edit" %>
     <% } %>
     <% @party.surveys.each { |survey| %>
         <% @survey = survey %>
-        <%= render @survey.type.downcase << "_edit" %>
+        <%= render "parties/" << @survey.type.downcase << "_edit" %>
     <% } %>
 
 
     <div class="actions">
-      <%= form.submit "Update" %>
+      <%= form.submit "Create" %>
     </div>
 
 <% end %>

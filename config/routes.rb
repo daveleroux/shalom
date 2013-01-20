@@ -94,9 +94,12 @@ Shalom::Application.routes.draw do
   root :to => 'sessions#new'
 
   match '/people/new' => 'person#new', :as => :new_person, :via => :get
-  match '/people' => 'person#create', :via => :post
+  #match '/people' => 'person#create', :via => :post
+  match '/person/create' => 'person#create', :via => :post
 
   match '/parties/:id' => 'parties#add_to_group', :via => :post
+  match '/parties/addressTypeChange' => 'parties#address_type_change', :via => :post
+  match '/people/addSelectedToGroup' => 'parties#add_selected_to_group', :via => :post
 
   match 'groups/sms/:id' => 'groups#sms', :as => :sms_group, :via => :post
   match 'groups/:group_id/party/:party_id' => 'groups#remove_party', :as => :remove_party_from_group

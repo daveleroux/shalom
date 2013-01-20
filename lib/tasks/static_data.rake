@@ -37,7 +37,7 @@ namespace :db do
   end
 
   desc "Clean, then fill database with static data"
-  task :fill_db => [:clean, :create_admin_user, :create_staff, :import_data] do
+  task :fill_db => [:clean, :create_admin_user, :import_data] do
   end
 
   task :import_data do

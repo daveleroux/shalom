@@ -7,7 +7,7 @@ class PartiesController < ApplicationController
     if !params[:q].blank?
       #logger.info params[:q].inspect
 
-      params[:q].each_pair do |k,v|
+      params[:q].each_pair do |k, v|
         if v == "Any"
           params[:q].delete(k)
         end
@@ -46,9 +46,10 @@ class PartiesController < ApplicationController
     @party = Party.find(params[:id])
   end
 
-  def new
-    @party = Party.new
-  end
+  #def new
+  #  logger.info "new called"
+  #  @party = Party.new
+  #end
 
 
   #def create
@@ -67,9 +68,7 @@ class PartiesController < ApplicationController
 
   def update
     @party = Party.find(params[:id])
-    logger.info "XXXXXXXXXXXXX"
-    logger.info params.inspect
-    logger.info "XXXXXXXXXXXXX"
+
     @party.update_attributes(params[:party])
     @party.base_address.update_attributes(params[:base_address])
 
@@ -77,12 +76,19 @@ class PartiesController < ApplicationController
 
     @party.surveys.update params[:survey].keys, params[:survey].values
 
-    if @party.save
-      flash[:success] = "Party updated."
-      redirect_to @party.partyize
+    addressTypeChanged = params[:address_type_changed]
+
+    if addressTypeChanged != "Residence" && addressTypeChanged != "Street"
+      if @party.save
+        flash[:success] = "Party updated."
+        redirect_to @party.partyize
+      else
+        flash[:notice] = 'Failed.'
+        render 'edit'
+      end
     else
-      flash[:notice] = 'Failed.'
-      #render 'edit'
+      @party.base_address = addressTypeChanged == "Residence" ? Res.create! : Address.create!
+      render 'edit'
     end
   end
 
@@ -91,6 +97,27 @@ class PartiesController < ApplicationController
     Party.find(params[:id]).destroy
     flash[:success] = "Party destroyed."
     redirect_to parties_path
+  end
+
+  def address_type_change
+    @party = nil
+    render :edit
+  end
+
+  def add_selected_to_group
+    group = Group.find_by_id(params[:groups][:group_id])
+    if (!group.nil?)
+      params[:selected_ids].split(",").each { |id|
+        party = Party.find(id)
+        if (!party.nil?)
+          group.parties << party
+        end
+      }
+    end
+
+
+    index
+    render :index
   end
 
   def add_to_group
