@@ -33,16 +33,44 @@
 <% end %>
 
 <script type="text/javascript">
-    function submitSelectedIds() {
+    function selectAll() {
+        $('.rowResult').prop("checked", true);
+    }
+
+    function selectNone() {
+        $('.rowResult').prop("checked", false);
+    }
+
+    function deleteSelected() {
+        if (confirm("Are you sure you want to delete the selected rows?")) {
+            var result = "";
+            $("#searchResults :checkbox:checked").each(function () {
+                result = result + this.value + ",";
+            });
+            $("#selected_ids_for_delete").val(result);
+            $("#deleteSelected").submit();
+        }
+    }
+
+    function exportSelectedToExcel() {
+        var result = "";
+        $("#searchResults :checkbox:checked").each(function () {
+            result = result + this.value + ",";
+        });
+        $("#selected_ids_for_export").val(result);
+        $("#exportSelectedToExcel").submit();
+    }
+
+    function addSelectedToGroup() {
         var result = "";
         $("#searchResults :checkbox:checked").each(function () {
             result = result + this.value + ",";
         });
         $("#selected_ids").val(result);
         $("#addSelectedToGroup").submit();
-//        return result;
-//        alert(result);
     }
+
+
 </script>
 
 <!--< render 'results' %>-->
@@ -53,18 +81,31 @@
 </table>
 
 
+<span class="pageActionsLeft">
+  <button onclick="selectAll()">Select All</button>
+  <button onclick="selectNone()">Select None</button>
+
+  <%= form_tag("/people/deleteSelected", :id => "deleteSelected") do %>
+      <%= hidden_field_tag(:selected_ids_for_delete) %>
+      <input type="button" onclick="deleteSelected()" value="Delete Selected">
+  <% end %>
+
+  <%= form_tag("/people/exportSelectedToExcel", :id => "exportSelectedToExcel") do %>
+      <%= hidden_field_tag(:selected_ids_for_export) %>
+      <input type="button" onclick="exportSelectedToExcel()" value="Export to Excel">
+  <% end %>
+</span>
+
 <span class="pageActions">
   <ul>
 
-    <%= form_tag("/people/addSelectedToGroup", :id =>"addSelectedToGroup") do %>
+    <%= form_tag("/people/addSelectedToGroup", :id => "addSelectedToGroup") do %>
         <%= hidden_field_tag(:selected_ids) %>
         <%= "Add results to group:" %>
         <br/>
         <%= select("groups", "group_id", Group.all.collect { |g| [g.name, g.id] }, {:include_blank => true}) %>
         <br/>
-        <!--< submit_tag("Add", :class => "alignRight", :onclick => "submitSelectedIds()") %>-->
-        <input type="button" onclick="submitSelectedIds()" value="Add">
-        <!--< input_tag("Add", :class => "alignRight", :onclick => "hello()", :type => "button") %>-->
+        <input type="button" onclick="addSelectedToGroup()" value="Add">
     <% end %>
 
   </ul>

@@ -100,6 +100,8 @@ Shalom::Application.routes.draw do
   match '/parties/:id' => 'parties#add_to_group', :via => :post
   match '/parties/addressTypeChange' => 'parties#address_type_change', :via => :post
   match '/people/addSelectedToGroup' => 'parties#add_selected_to_group', :via => :post
+  match '/people/deleteSelected' => 'parties#delete_selected', :via => :post
+  match '/people/exportSelectedToExcel' => 'parties#export_selected_to_excel', :via => :post
 
   match 'groups/sms/:id' => 'groups#sms', :as => :sms_group, :via => :post
   match 'groups/:group_id/party/:party_id' => 'groups#remove_party', :as => :remove_party_from_group

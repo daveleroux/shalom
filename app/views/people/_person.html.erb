@@ -1,5 +1,5 @@
 <tr>
-  <td><input type="checkbox" value="<%= person.id %>" checked="yes" /></td>
+  <td><input type="checkbox" value="<%= person.id %>" checked="yes" class="rowResult"/></td>
   <td><%= link_to person.name, party_path(person) %></td>
-   <td><%= link_to "delete", party_path(person), :method => :delete, :confirm => "You sure?", :title => "Delete #{person.name}" %></td>
+   <!--<td>< link_to "delete", party_path(person), :method => :delete, :confirm => "You sure?", :title => "Delete #{person.name}" %></td>-->
 </tr>

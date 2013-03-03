@@ -3,7 +3,6 @@ class PartiesController < ApplicationController
   respond_to :html
 
   def index
-
     if !params[:q].blank?
       #logger.info params[:q].inspect
 
@@ -114,11 +113,76 @@ class PartiesController < ApplicationController
         end
       }
     end
-
-
     index
     render :index
   end
+
+  def delete_selected
+    found = false
+    failed = false
+
+    params[:selected_ids_for_delete].split(",").each { |id|
+      found = true
+      party = Party.find(id)
+      if (!party.destroy)
+        failed = true
+      end
+    }
+    #if (found)
+    #  if (failed)
+    #    flash[:alert] = "Did not manage to delete all selected parties."
+    #  else
+    #    flash[:success] = "Deletion succeeded."
+    #  end
+    #end
+    index
+    render :index
+  end
+
+  def export_selected_to_excel
+    @selectedParties = []
+    params[:selected_ids_for_export].split(",").each { |id|
+      party = Party.find(id)
+      @selectedParties << party
+    }
+
+
+
+    #respond_to do |format|
+    #  format.xls {
+    #    workBook = Spreadsheet::Workbook.new
+    #    list = workBook.create_worksheet :name => 'Search Results'
+    #    list.row(0).concat %w{Name Surname}
+    #    @selectedParties.each_with_index { |selectedParty, i|
+    #      list.row(i+1).push selectedParty.name, selectedParty.surname
+    #    }
+    #    #header_format = Spreadsheet::Format.new :color => :green, :weight => :bold
+    #    #list.row(0).default_format = header_format
+    #    #output to blob object
+    #    blob = StringIO.new("")
+    #    workBook.write blob
+    #    #respond with blob object as a file
+    #    send_data blob.string, :type => :xls, :filename => "search_results.xls"
+    #  }
+    #end
+        workBook = Spreadsheet::Workbook.new
+        list = workBook.create_worksheet :name => 'Search Results'
+        list.row(0).concat %w{Name Surname}
+        @selectedParties.each_with_index { |selectedParty, i|
+          list.row(i+1).push selectedParty.name, selectedParty.surname
+        }
+        #header_format = Spreadsheet::Format.new :color => :green, :weight => :bold
+        #list.row(0).default_format = header_format
+        #output to blob object
+        blob = StringIO.new("")
+        workBook.write blob
+        #respond with blob object as a file
+        send_data blob.string, :type => :xls, :filename => "search_results.xls"
+
+
+
+  end
+
 
   def add_to_group
     @party = Party.find_by_id(params[:party_id])

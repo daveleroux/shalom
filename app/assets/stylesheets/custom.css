@@ -60,6 +60,11 @@ nav {
     float: right;
 }
 
+.pageActionsLeft
+{
+    float: left;
+}
+
 .pageActions {
     float: right;
     /*background-color: #09c;*/
