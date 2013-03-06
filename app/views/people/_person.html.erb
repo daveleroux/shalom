@@ -1,5 +1,8 @@
-<tr>
-  <td><input type="checkbox" value="<%= person.id %>" checked="yes" class="rowResult"/></td>
-  <td><%= link_to person.name, party_path(person) %></td>
+<tr onclick='window.location.href="<%=party_path(person)%>"'>
+  <td><input onclick="stopPropagation(event);" type="checkbox" value="<%= person.id %>" checked="yes" class="rowResult"/></td>
+  <td><%=person.name %></td>
+  <td><%=person.surname %></td>
+  <td><%=person.gender %></td>
+  <td><%=person.base_address.residence %></td>
    <!--<td>< link_to "delete", party_path(person), :method => :delete, :confirm => "You sure?", :title => "Delete #{person.name}" %></td>-->
 </tr>

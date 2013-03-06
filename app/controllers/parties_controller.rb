@@ -146,41 +146,46 @@ class PartiesController < ApplicationController
       @selectedParties << party
     }
 
+    workBook = Spreadsheet::Workbook.new
+    list = workBook.create_worksheet :name => 'Search Results'
+    list.row(0).concat ["Name",
+                        "Surname",
+                        "Email",
+                        "Cell",
+                        "Residence",
+                        "Room Number",
+                        "Gender",
+                        "Member",
+                        "Interested in investigating the faith",
+                        "Interested in a Bible study",
+                        "Interested in a small event",
+                        "Faculty",
+                        "Notes"
+                       ]
+    @selectedParties.each_with_index { |selectedParty, i|
 
+      studentRole = selectedParty.getStudentRole
+      survey = selectedParty.getLastSurvey
 
-    #respond_to do |format|
-    #  format.xls {
-    #    workBook = Spreadsheet::Workbook.new
-    #    list = workBook.create_worksheet :name => 'Search Results'
-    #    list.row(0).concat %w{Name Surname}
-    #    @selectedParties.each_with_index { |selectedParty, i|
-    #      list.row(i+1).push selectedParty.name, selectedParty.surname
-    #    }
-    #    #header_format = Spreadsheet::Format.new :color => :green, :weight => :bold
-    #    #list.row(0).default_format = header_format
-    #    #output to blob object
-    #    blob = StringIO.new("")
-    #    workBook.write blob
-    #    #respond with blob object as a file
-    #    send_data blob.string, :type => :xls, :filename => "search_results.xls"
-    #  }
-    #end
-        workBook = Spreadsheet::Workbook.new
-        list = workBook.create_worksheet :name => 'Search Results'
-        list.row(0).concat %w{Name Surname}
-        @selectedParties.each_with_index { |selectedParty, i|
-          list.row(i+1).push selectedParty.name, selectedParty.surname
-        }
-        #header_format = Spreadsheet::Format.new :color => :green, :weight => :bold
-        #list.row(0).default_format = header_format
-        #output to blob object
-        blob = StringIO.new("")
-        workBook.write blob
-        #respond with blob object as a file
-        send_data blob.string, :type => :xls, :filename => "search_results.xls"
-
-
-
+      list.row(i+1).push selectedParty.name,
+                         selectedParty.surname,
+                         selectedParty.email,
+                         selectedParty.cell,
+                         selectedParty.base_address.residence,
+                         selectedParty.base_address.room,
+                         selectedParty.gender,
+                         studentRole == nil ? nil : studentRole.member,
+                         survey == nil ? nil : survey.investigate,
+                         survey == nil ? nil : survey.bible_study,
+                         survey == nil ? nil : survey.small_event,
+                         studentRole == nil ? nil : studentRole.faculty,
+                         selectedParty.notes,
+    }
+    header_format = Spreadsheet::Format.new :weight => :bold
+    list.row(0).default_format = header_format
+    blob = StringIO.new("")
+    workBook.write blob
+    send_data blob.string, :type => :xls, :filename => "search_results.xls"
   end
 
 

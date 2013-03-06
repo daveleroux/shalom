@@ -253,3 +253,9 @@ ul.users {
   border: 1px gray;
   background: #d3d3d3;
 }
+
+table.searchResults tr:hover {
+	background-color: #efefff;
+	cursor: hand;
+    cursor: pointer;
+}

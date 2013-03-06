@@ -2,6 +2,9 @@
 
 <%= link_to "Create new person", new_person_path %>
 
+<p></p>
+<h3>Search</h3>
+
 <%= search_form_for @search, url: search_parties_path, html: {method: :post} do |f| %>
     <% setup_search_form f %>
 
@@ -33,6 +36,16 @@
 <% end %>
 
 <script type="text/javascript">
+  function stopPropagation(event)
+  {
+      event.stopPropagation();
+  }
+    $(document).keypress(function(e) {
+        if(e.which == 13) {
+            $("#party_search").submit();
+        }
+    });
+
     function selectAll() {
         $('.rowResult').prop("checked", true);
     }
@@ -74,7 +87,7 @@
 </script>
 
 <!--< render 'results' %>-->
-<table id="searchResults">
+<table id="searchResults" class="searchResults">
   <tbody>
   <%= render @parties %>
   </tbody>

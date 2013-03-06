@@ -6,9 +6,22 @@ class Party < ActiveRecord::Base
     self.becomes(Party)
   end
 
+  def getStudentRole
+    party_roles.each { |role|
+      if role.kind_of? StudentRole
+        return role
+      end
+    }
+    return nil
+  end
+
+  def getLastSurvey
+    return surveys.length > 0 ? surveys.last : nil
+  end
+
   def self.ransackable_attributes(auth_object = nil)
-      #super & ['name', 'notes', 'surname', 'email', 'cell', 'gender', 'created_at', 'updated_at']
-      super & ['name', 'notes', 'surname', 'email', 'cell', 'gender']
+    #super & ['name', 'notes', 'surname', 'email', 'cell', 'gender', 'created_at', 'updated_at']
+    super & ['name', 'notes', 'surname', 'email', 'cell', 'gender']
   end
 
   has_many :surveys, :dependent => :destroy
