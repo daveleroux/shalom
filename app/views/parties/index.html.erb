@@ -1,6 +1,6 @@
-<h1>People and organisations</h1>
+<h1>People</h1>
 
-<%= link_to "Create new person", new_person_path %>
+<%= link_to "Capture person details", new_person_path %>
 
 <p></p>
 <h3>Search</h3>
@@ -13,6 +13,18 @@
     <br/>
     <%= f.label "Residence: " %>
     <%= f.select :base_address_residence_eq, ([] << :Any)+ Residence.values %>
+    <br/>
+    <%= f.label "Interested in investigating the faith: " %>
+    <%= f.select :surveys_investigate_eq, ([] << :Any << :true << :false) %>
+    <br/>
+    <%= f.label "Interested in a Bible study: " %>
+    <%= f.select :surveys_bible_study_eq, ([] << :Any << :true << :false) %>
+    <br/>
+    <%= f.label "Interested in a small event: " %>
+    <%= f.select :surveys_small_event_eq, ([] << :Any << :true << :false) %>
+    <br/>
+    <%= f.label "Member: " %>
+    <%= f.select :party_roles_member_eq, ([] << :Any << :true << :false) %>
 
     <!--<fieldset>-->
     <!--<legend>Sorting</legend>-->
@@ -36,12 +48,11 @@
 <% end %>
 
 <script type="text/javascript">
-  function stopPropagation(event)
-  {
-      event.stopPropagation();
-  }
-    $(document).keypress(function(e) {
-        if(e.which == 13) {
+    function stopPropagation(event) {
+        event.stopPropagation();
+    }
+    $(document).keypress(function (e) {
+        if (e.which == 13) {
             $("#party_search").submit();
         }
     });
@@ -79,7 +90,7 @@
         $("#searchResults :checkbox:checked").each(function () {
             result = result + this.value + ",";
         });
-        $("#selected_ids").val(result);
+        $("#selected_ids_for_group").val(result);
         $("#addSelectedToGroup").submit();
     }
 
@@ -105,7 +116,7 @@
 
   <%= form_tag("/people/exportSelectedToExcel", :id => "exportSelectedToExcel") do %>
       <%= hidden_field_tag(:selected_ids_for_export) %>
-      <input type="button" onclick="exportSelectedToExcel()" value="Export to Excel">
+      <input type="button" onclick="exportSelectedToExcel()" value="Export selected to Excel">
   <% end %>
 </span>
 
@@ -113,8 +124,8 @@
   <ul>
 
     <%= form_tag("/people/addSelectedToGroup", :id => "addSelectedToGroup") do %>
-        <%= hidden_field_tag(:selected_ids) %>
-        <%= "Add results to group:" %>
+        <%= hidden_field_tag(:selected_ids_for_group) %>
+        <%= "Add selected to group:" %>
         <br/>
         <%= select("groups", "group_id", Group.all.collect { |g| [g.name, g.id] }, {:include_blank => true}) %>
         <br/>

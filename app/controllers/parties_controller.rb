@@ -106,10 +106,10 @@ class PartiesController < ApplicationController
   def add_selected_to_group
     group = Group.find_by_id(params[:groups][:group_id])
     if (!group.nil?)
-      params[:selected_ids].split(",").each { |id|
+      params[:selected_ids_for_group].split(",").each { |id|
         party = Party.find(id)
         if (!party.nil?)
-          group.parties << party
+          group.addParty(party)
         end
       }
     end
@@ -194,7 +194,7 @@ class PartiesController < ApplicationController
     if (!@party.nil?)
       @group = Group.find_by_id(params[:groups][:group_id])
       if (!@group.nil?)
-        @group.parties << @party
+        @group.addParty(@party)
       end
       render 'show'
     else
