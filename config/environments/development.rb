@@ -1,3 +1,4 @@
+RAILS_GEM_VERSION = '3.1.3'
 Shalom::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 

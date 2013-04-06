@@ -1,3 +1,4 @@
+RAILS_GEM_VERSION = '3.1.3'
 Shalom::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
@@ -64,5 +65,9 @@ Shalom::Application.configure do
                                         :password => "aprilmayjune",
                                         :authentication => :plain,
                                         :openssl_verify_mode => 'none'}
+
+
+  #config.assets.precompile += %w( *.css *.js )
+  config.assets.precompile += %w( blueprint/screen.css blueprint/print.css blueprint/ie.css custom.css )
 
 end
