@@ -2,6 +2,14 @@
 
 <%= link_to "Capture person details", new_person_path %>
 
+<br/>
+<br/>
+<b>Import from CSV</b>
+<%= form_tag({:action => :import}, :multipart => true) do %>
+    <%= file_field_tag 'csv' %>
+    <%= submit_tag("Import") %>
+<% end %>
+
 <p></p>
 <h3>Search</h3>
 
